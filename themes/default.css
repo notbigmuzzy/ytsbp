@@ -2,6 +2,7 @@
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	line-height: 1;
 }
 
 a {
@@ -121,13 +122,15 @@ section > title {
 	font-family: sans-serif;
 	position: relative;
 	margin-right: 20px;
-	min-width: 500px;
+	min-width: 200px;
 	height: 275px;
 	color: rgba(255, 255, 255, 0.25);
-	min-width: 250px;
 	background-color: rgba(0,0,0,0.5);
 	color: #666;
 	font-weight: bold;
+	text-align: center;
+	padding: 0 5px;
+	line-height: 1.25;
 }
 
 section item a {
@@ -153,6 +156,7 @@ section item title {
 	font-weight: bold;
 	background-color: rgba(0,0,0,0.75);
 	opacity: 0;
+	line-height: 1.25;
 }
 
 section item:hover title {
@@ -172,4 +176,50 @@ section item img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+}
+
+#iframe-popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	border: none;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: -1;
+}
+
+#iframe-close {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	background-color: rgba(255,0,0,0.75);
+	font-family: sans;
+	font-weight: bold;
+	font-size: 15px;
+	padding: 30px 30px 50px 50px;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: -1;
+	border-bottom-left-radius: 100%;
+}
+
+#iframe-close:hover {
+	opacity: 1;
+}
+
+
+#iframe-popup.show {
+	visibility: visible;
+	pointer-events: initial;
+	z-index: 15;
+}
+
+#iframe-popup.show + #iframe-close {
+	visibility: visible;
+	pointer-events: initial;
+	z-index: 20;
 }

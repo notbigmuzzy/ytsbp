@@ -6,7 +6,7 @@ touch index.html
 THEME=default
 
 #OPEN BODY
-echo "<!DOCTYPE html><html><head><title>yTsBp</title><link rel='shortcut icon' href='favicon.ico'>
+echo "<!DOCTYPE html><html><head><title>Y⍾T⍾S⍾B⍾P</title><link rel='shortcut icon' href='favicon.ico'>
 <link type='text/css' rel='stylesheet' href='themes/$THEME.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
 </head><body>" >> index.html
 
@@ -41,16 +41,20 @@ do
 done
 cd ..
 
+#ADD EMPTY IFRAME
+echo "<iframe id='iframe-popup' src='' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><a href='#' id='iframe-close'>x</a>" >> index.html
 #CLOSE BODY
 echo "</body>" >> index.html
 #INIT IMG LAZYLOADING 
 echo "<script>const observer = lozad(); observer.observe();</script>" >> index.html
+#HANDLE IFRAME POPUP
+echo "<script>let iframePopup = document.getElementById('iframe-popup'); let iframeClose=document.getElementById('iframe-close');document.addEventListener('click',function(event){if(!event.target.matches('.iframe-source')){return}event.preventDefault();let iframeLink=event.target.getAttribute('href');iframePopup.classList.add('show');iframePopup.src=iframeLink},false);document.addEventListener('click',function(event){if(!event.target.matches('#iframe-close')){return}event.preventDefault();iframePopup.classList.remove('show');iframePopup.src=''},false);</script>" >> index.html
 #CLOSE HTML
 echo "</html>" >> index.html
 
 # #SANITIZE LINKS
 #CREATE LINK TO EMBED
-find index.html -exec sed -i 's/<yt:videoId>/<a href="https:\/\/www.youtube.com\/embed\//g' {} \;
+find index.html -exec sed -i 's/<yt:videoId>/<a class="iframe-source" href="https:\/\/www.youtube.com\/embed\//g' {} \;
 find index.html -exec sed -i 's/<\/yt:videoId>/" ><\/a>/g' {} \;
 
 # #ITEM
