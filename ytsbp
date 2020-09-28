@@ -1,0 +1,60 @@
+#PREP FILE
+rm index.html
+touch index.html
+
+#VARS
+THEME=default
+
+#OPEN BODY
+echo "<!DOCTYPE html><html><head><title>yTsBp</title><link rel='shortcut icon' href='favicon.ico'>
+<link type='text/css' rel='stylesheet' href='themes/$THEME.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
+</head><body>" >> index.html
+
+#LEFT NAV
+echo "<nav><a href='index.html' class='icon'><span>⍾</span></a>" >> index.html
+echo "<div class='links'>" >> index.html
+	cd subs
+		for d in `find * -type d`
+		do
+			echo "<a href='#$d'><span>$d</span></a>" >> ../index.html
+		done
+	cd ..
+echo "</div>" >> index.html
+echo "<a href='#' class='icon'><span>⊙</span></a>" >> index.html
+echo "</nav>" >> index.html
+
+#GET SUBS LOGIC
+cd subs
+for d in `find * -type d`
+do
+	echo "<p class='section-title' id='$d'>$d</p>" >> ../index.html
+	cd $d
+		for f in `find * -type f`
+		do
+			#CREATE SECTION
+			URL=$(cat $f);
+			echo "<section>" >> ../../index.html
+			curl https://www.youtube.com/feeds/videos.xml?channel_id=$URL | grep -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail	-e \</entry\>  >> ../../index.html && 
+			echo "</section>" >> ../../index.html
+		done
+	cd ..
+done
+cd ..
+
+#CLOSE BODY
+echo "</body>" >> index.html
+#INIT IMG LAZYLOADING 
+echo "<script>const observer = lozad(); observer.observe();</script>" >> index.html
+#CLOSE HTML
+echo "</html>" >> index.html
+
+# #SANITIZE LINKS
+#CREATE LINK TO EMBED
+find index.html -exec sed -i 's/<yt:videoId>/<a href="https:\/\/www.youtube.com\/embed\//g' {} \;
+find index.html -exec sed -i 's/<\/yt:videoId>/" ><\/a>/g' {} \;
+
+# #ITEM
+find index.html -exec sed -i 's/entry/item/g' {} \;
+
+# #THUMB
+find index.html -exec sed -i 's/media:thumbnail url/img class="lozad" data-src/g' {} \;

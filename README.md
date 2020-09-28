@@ -1,1 +1,1 @@
-# ytsbp
+# Youtube subscriptions player
