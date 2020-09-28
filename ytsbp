@@ -48,16 +48,16 @@ echo "</body>" >> index.html
 #INIT IMG LAZYLOADING 
 echo "<script>const observer = lozad(); observer.observe();</script>" >> index.html
 #HANDLE IFRAME POPUP
-echo "<script>let iframePopup = document.getElementById('iframe-popup'); let iframeClose=document.getElementById('iframe-close');document.addEventListener('click',function(event){if(!event.target.matches('.iframe-source')){return}event.preventDefault();let iframeLink=event.target.getAttribute('href');iframePopup.classList.add('show');iframePopup.src=iframeLink},false);document.addEventListener('click',function(event){if(!event.target.matches('#iframe-close')){return}event.preventDefault();iframePopup.classList.remove('show');iframePopup.src=''},false);</script>" >> index.html
+echo "<script>let iframePopup = document.getElementById('iframe-popup'); let iframeClose=document.getElementById('iframe-close');document.addEventListener('click',function(event){if(!event.target.matches('.iframe-source')){return}event.preventDefault();let iframeLink=event.target.getAttribute('href');iframePopup.classList.add('show');iframePopup.src=iframeLink},false);document.addEventListener('click',function(event){if(!event.target.matches('#iframe-close')){return}event.preventDefault();iframePopup.classList.remove('show');iframePopup.src=''},false);document.addEventListener('keydown',event=>{if(event.isComposing||event.keyCode===27){iframePopup.classList.remove('show');iframePopup.src=''}});;</script>" >> index.html
 #CLOSE HTML
 echo "</html>" >> index.html
 
-# #SANITIZE LINKS
+#SANITIZE LINKS
 #CREATE LINK TO EMBED
 find index.html -exec sed -i 's/<yt:videoId>/<a class="iframe-source" href="https:\/\/www.youtube.com\/embed\//g' {} \;
 find index.html -exec sed -i 's/<\/yt:videoId>/" ><\/a>/g' {} \;
 
-# #ITEM
+#ITEM
 find index.html -exec sed -i 's/entry/item/g' {} \;
 
 # #THUMB
