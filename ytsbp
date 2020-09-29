@@ -6,9 +6,9 @@ touch index.html
 THEME=default
 
 #OPEN BODY
-echo "<!DOCTYPE html><html><head><title>Y⍾T⍾S⍾B⍾P</title><link rel='shortcut icon' href='favicon.ico'>
+echo "<!DOCTYPE html><html id='html'><head><title>Y⍾T⍾S⍾B⍾P</title><link rel='shortcut icon' href='favicon.ico'>
 <link type='text/css' rel='stylesheet' href='themes/$THEME.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
-</head><body>" >> index.html
+</head><body id='body'>" >> index.html
 
 #LEFT NAV
 echo "<nav><a href='index.html' class='icon logo'><span>⍾</span></a>" >> index.html

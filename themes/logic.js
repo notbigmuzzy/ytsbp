@@ -52,3 +52,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
         })
 });
+
+//FULLSCREEN
+document.addEventListener('dblclick', event => {
+    var elem = document.getElementById('html');
+
+    if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+    elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+    elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+    elem.msRequestFullscreen();
+    }
+});
+
+
