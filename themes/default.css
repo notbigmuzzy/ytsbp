@@ -9,6 +9,15 @@ a {
 	text-decoration: none;
 }
 
+input {
+	outline: none;
+	border: none;
+}
+
+.hide {
+	display: none !important;
+}
+
 body,html {
 	height: 100%;
 	width: 100%;
@@ -39,7 +48,8 @@ nav {
     z-index: 1;
 }
 
-nav a {
+nav a,
+nav p {
 	display: block;
 	position: relative;
 	width: 100%;
@@ -47,7 +57,8 @@ nav a {
 	overflow: hidden; 
 }
 
-nav a span {
+nav a span,
+nav p span {
 	display: inline-block;
 	padding: 20px 0;
 	font-family: sans-serif;
@@ -56,22 +67,38 @@ nav a span {
 	color: white;
 }
 
-nav a.icon span {
+nav a.icon span,
+nav p.icon span {
 	color: white;
 	font-size: 26px;
 }
 
 nav .search {
+	display: block;
+	font-style: normal;
 	transform: rotate(180deg);
+	font-size: 22px;
+	pointer-events: none;
+	position: relative;
+	z-index: 2;
 }
 
-nav a:hover {
+nav a:not(.icon) span:first-letter {
+	color: white;
+}
+
+nav a:hover,
+nav p:hover {
 	overflow: visible;
 	background-color: #e52325;
+	color: #fff;
+	cursor: pointer;
 }
 
-nav a:hover span {
+nav a:hover span,
+nav p:hover span {
 	background-color: #e52325;
+	color: #fff;
 }
 
 nav a:not(.icon) span {
@@ -79,13 +106,44 @@ nav a:not(.icon) span {
 	padding: 20px;
 }
 
-nav a:not(.icon) span:first-letter {
-	color: white;
+nav a:hover span {
+	z-index: 9;
+	color: #fff;
 }
 
-nav a:hover span {
-	color: white;
-	z-index: 9;
+nav #search-input {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	line-height: 1;
+	padding: 0 5px 0 55px;
+	background-color: transparent;
+	color: #fff;
+	font-size: 18px;
+	font-family: sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+nav #search-input:hover {
+	background-color: #e52325;
+}
+
+nav #search-input::-webkit-input-placeholder {
+	color: #fff;
+}
+
+nav #search-input:-moz-placeholder {
+	color: #fff;
+}
+
+nav #search-input::-moz-placeholder {
+	color: #fff;
+}
+
+nav #search-input:-ms-input-placeholder {
+	color: #fff;
 }
 
 .links {
@@ -199,7 +257,7 @@ section item img {
 	top: 0;
 	right: 0;
 	color: white;
-	background-color: rgba(255,0,0,0.75);
+	background-color: #e52325;
 	font-family: sans;
 	font-weight: bold;
 	font-size: 15px;
