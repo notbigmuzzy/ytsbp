@@ -8,7 +8,7 @@ rm $SCRIPTPATH/index.html
 touch $SCRIPTPATH/index.html
 
 #OPEN BODY
-echo "<!DOCTYPE html><html id='html'><head><title>☛ ☈☉☊☌☡ ☚</title><link type='text/css' rel='stylesheet' href='themes/$THEME.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
+echo "<!DOCTYPE html><html id='html'><head><title>☛ ☈☉☊☌☡ ☚</title><link rel='shortcut icon' href='favicon.ico'><link type='text/css' rel='stylesheet' href='themes/$THEME.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
 </head><body id='body'>" >> $SCRIPTPATH/index.html
 
 #LEFT NAV
