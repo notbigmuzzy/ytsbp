@@ -273,7 +273,6 @@ section item img {
 	opacity: 1;
 }
 
-
 #iframe-popup.show {
 	visibility: visible;
 	pointer-events: initial;
@@ -284,4 +283,13 @@ section item img {
 	visibility: visible;
 	pointer-events: initial;
 	z-index: 20;
+}
+
+.latest section > title,
+.latest section item {
+	display: none;
+}
+
+.latest section > title + item {
+	display: block;
 }

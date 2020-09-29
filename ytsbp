@@ -1,63 +1,106 @@
-#PREP FILE
-rm index.html
-touch index.html
-
 #VARS
+SCRIPTPATH=$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 THEME=default
+echo 'GETTING XML';
+ 
+#PREP FILE
+rm $SCRIPTPATH/index.html
+touch $SCRIPTPATH/index.html
 
 #OPEN BODY
-echo "<!DOCTYPE html><html id='html'><head><title>☛ ☈☉☊☌☡ ☚</title><link rel='shortcut icon' href='favicon.ico'>
-<link type='text/css' rel='stylesheet' href='themes/$THEME.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
-</head><body id='body'>" >> index.html
+echo "<!DOCTYPE html><html id='html'><head><title>☛ ☈☉☊☌☡ ☚</title><link type='text/css' rel='stylesheet' href='themes/$THEME.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
+</head><body id='body'>" >> $SCRIPTPATH/index.html
 
 #LEFT NAV
-echo "<nav><a href='index.html' class='icon logo'><span>⍾</span></a>" >> index.html
-echo "<div class='links'>" >> index.html
-	cd subs
+echo "<nav><a href='index.html' class='icon logo'><span>⍾</span></a>" >> $SCRIPTPATH/index.html
+echo "<div class='links'>" >> $SCRIPTPATH/index.html
+	echo "<a href='#latest'><span>Latest</span></a>" >> $SCRIPTPATH/index.html
+	cd $SCRIPTPATH/subs
 		for d in `find * -type d`
 		do
-			echo "<a href='#$d'><span>$d</span></a>" >> ../index.html
+			echo "<a href='#$d'><span>$d</span></a>" >> $SCRIPTPATH/index.html
 		done
 	cd ..
-echo "</div>" >> index.html
-echo "<div class='links'><p class='icon' id='input-toggle'><span><i class='search'>☌</i><input id='search-input' type='text' placeholder='Filter..' /></span></p></div>" >> index.html
-echo "</nav>" >> index.html
+echo "</div>" >> $SCRIPTPATH/index.html
+echo "<div class='links'><p class='icon' id='input-toggle'><span><i class='search'>☌</i><input id='search-input' type='text' placeholder='Filter..' /></span></p></div>" >> $SCRIPTPATH/index.html
+echo "</nav>" >> $SCRIPTPATH/index.html
 
-#GET SUBS LOGIC
-cd subs
+#GET SUBSCRIPTIONS TO TMP FOLDER
+rm -r $SCRIPTPATH/tmp
+mkdir $SCRIPTPATH/tmp
+cd $SCRIPTPATH/subs
 for d in `find * -type d`
 do
-	echo "<div class='category'><p class='section-title' id='$d'>$d</p>" >> ../index.html
 	cd $d
 		for f in `find * -type f`
 		do
-			#CREATE SECTION
 			URL=$(cat $f);
-			echo "<section>" >> ../../index.html
-			curl https://www.youtube.com/feeds/videos.xml?channel_id=$URL | grep -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail	-e \</entry\>  >> ../../index.html && 
-			echo "</section>" >> ../../index.html
+			cd $SCRIPTPATH/tmp
+			mkdir $d
+			cd $d
+			curl https://www.youtube.com/feeds/videos.xml?channel_id=$URL >> $f  
+			cd $SCRIPTPATH/subs/$d
 		done
 	cd ..
-	echo "</div>" >> ../index.html
 done
-cd ..
+cd $SCRIPTPATH
+
+echo 'GENERATING HTML';
+
+#GENERATE LATEST SPECIAL
+cd $SCRIPTPATH/tmp
+echo "<div class='category latest'><p class='section-title' id='latest'>Latest videos</p>" >> $SCRIPTPATH/index.html
+echo "<section>" >> $SCRIPTPATH/index.html
+for d in `find * -type d`
+do
+	cd $d
+		for f in `find * -type f`
+		do
+			URL=$(cat $f);
+			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail	-e \</entry\>  >> $SCRIPTPATH/index.html
+		done
+	cd ..
+done
+echo "</section>" >> $SCRIPTPATH/index.html
+echo "</div>" >> $SCRIPTPATH/index.html
+cd $SCRIPTPATH
+
+
+#GENERATE CATEGORY
+cd $SCRIPTPATH/tmp
+for d in `find * -type d`
+do
+	echo "<div class='category'><p class='section-title' id='$d'>$d</p>" >> $SCRIPTPATH/index.html
+	cd $d
+		for f in `find * -type f`
+		do
+			URL=$(cat $f);
+			echo "<section>" >> $SCRIPTPATH/index.html
+			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail	-e \</entry\>  >> $SCRIPTPATH/index.html && 
+			echo "</section>" >> $SCRIPTPATH/index.html
+		done
+	cd ..
+	echo "</div>" >> $SCRIPTPATH/index.html
+done
+cd $SCRIPTPATH
 
 #ADD EMPTY IFRAME
-echo "<iframe id='iframe-popup' src='' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><a href='#' id='iframe-close'>✕</a>" >> index.html
+echo "<iframe id='iframe-popup' src='' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><a href='#' id='iframe-close'>✕</a>" >> $SCRIPTPATH/index.html
 #CLOSE BODY
-echo "</body>" >> index.html
+echo "</body>" >> $SCRIPTPATH/index.html
 #INCLUDE JS
-echo "<script src='themes/logic.js'></script>" >> index.html
+echo "<script src='themes/logic.js'></script>" >> $SCRIPTPATH/index.html
 #CLOSE HTML
-echo "</html>" >> index.html
+echo "</html>" >> $SCRIPTPATH/index.html
 
-#SANITIZE LINKS
+echo 'SANITIZING';
 #CREATE LINK TO EMBED
-find index.html -exec sed -i 's/<yt:videoId>/<a class="iframe-source" href="https:\/\/www.youtube.com\/embed\//g' {} \;
-find index.html -exec sed -i 's/<\/yt:videoId>/" ><\/a>/g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/<yt:videoId>/<a class="iframe-source" href="https:\/\/www.youtube.com\/embed\//g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/<\/yt:videoId>/" ><\/a>/g' {} \;
 
 #ITEM
-find index.html -exec sed -i 's/entry/item/g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/entry/item/g' {} \;
 
 #THUMB
-find index.html -exec sed -i 's/media:thumbnail url/img class="lozad" data-src/g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/media:thumbnail url/img class="lozad" data-src/g' {} \;
+echo 'DONE!';
