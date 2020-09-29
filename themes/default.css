@@ -61,6 +61,10 @@ nav a.icon span {
 	font-size: 26px;
 }
 
+nav .search {
+	transform: rotate(180deg);
+}
+
 nav a:hover {
 	overflow: visible;
 	background-color: #e52325;

@@ -11,7 +11,7 @@ echo "<!DOCTYPE html><html><head><title>Y⍾T⍾S⍾B⍾P</title><link rel='shor
 </head><body>" >> index.html
 
 #LEFT NAV
-echo "<nav><a href='index.html' class='icon'><span>⍾</span></a>" >> index.html
+echo "<nav><a href='index.html' class='icon logo'><span>⍾</span></a>" >> index.html
 echo "<div class='links'>" >> index.html
 	cd subs
 		for d in `find * -type d`
@@ -20,7 +20,7 @@ echo "<div class='links'>" >> index.html
 		done
 	cd ..
 echo "</div>" >> index.html
-echo "<a href='#' class='icon'><span>⊙</span></a>" >> index.html
+echo "<a href='#' class='icon search'><span>☌</span></a>" >> index.html
 echo "</nav>" >> index.html
 
 #GET SUBS LOGIC
@@ -42,7 +42,7 @@ done
 cd ..
 
 #ADD EMPTY IFRAME
-echo "<iframe id='iframe-popup' src='' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><a href='#' id='iframe-close'>x</a>" >> index.html
+echo "<iframe id='iframe-popup' src='' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><a href='#' id='iframe-close'>✕</a>" >> index.html
 #CLOSE BODY
 echo "</body>" >> index.html
 #INIT IMG LAZYLOADING 
