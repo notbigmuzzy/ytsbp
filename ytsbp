@@ -76,7 +76,7 @@ do
 		do
 			URL=$(cat $f);
 			echo "<section>" >> $SCRIPTPATH/index.html
-			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail -e published	-e \</entry\>  >> $SCRIPTPATH/index.html && 
+			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e \<media:thumbnail -e \<published\>	-e \</entry\>  >> $SCRIPTPATH/index.html && 
 			echo "</section>" >> $SCRIPTPATH/index.html
 		done
 	cd ..
