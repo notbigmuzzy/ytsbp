@@ -12,7 +12,7 @@ echo "<!DOCTYPE html><html id='html'><head><title>☛ ☈☉☊☌☡ ☚</title
 </head><body id='body'>" >> $SCRIPTPATH/index.html
 
 #LEFT NAV
-echo "<nav><a href='index.html' class='icon logo'><span>⍾</span></a>" >> $SCRIPTPATH/index.html
+echo "<nav><div class='back'></div><a href='index.html' class='icon logo'><span>⍾</span></a>" >> $SCRIPTPATH/index.html
 echo "<div class='links'>" >> $SCRIPTPATH/index.html
 	echo "<a href='#latest'><span>Latest</span></a>" >> $SCRIPTPATH/index.html
 	cd $SCRIPTPATH/subs
