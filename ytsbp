@@ -96,7 +96,7 @@ echo "</html>" >> $SCRIPTPATH/index.html
 echo 'SANITIZING';
 #CREATE LINK TO EMBED
 find $SCRIPTPATH/index.html -exec sed -i 's/<yt:videoId>/<a class="iframe-source" href="https:\/\/www.youtube.com\/embed\//g' {} \;
-find $SCRIPTPATH/index.html -exec sed -i 's/<\/yt:videoId>/" ><\/a>/g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/<\/yt:videoId>/?rel=0" ><\/a>/g' {} \;
 
 #ITEM
 find $SCRIPTPATH/index.html -exec sed -i 's/entry/item/g' {} \;
