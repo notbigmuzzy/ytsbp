@@ -57,7 +57,7 @@ do
 		for f in `find * -type f`
 		do
 			URL=$(cat $f);
-			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail	-e \</entry\>  >> $SCRIPTPATH/index.html
+			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail -e published	-e \</entry\>  >> $SCRIPTPATH/index.html
 		done
 	cd ..
 done
@@ -76,7 +76,7 @@ do
 		do
 			URL=$(cat $f);
 			echo "<section>" >> $SCRIPTPATH/index.html
-			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail	-e \</entry\>  >> $SCRIPTPATH/index.html && 
+			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail -e published	-e \</entry\>  >> $SCRIPTPATH/index.html && 
 			echo "</section>" >> $SCRIPTPATH/index.html
 		done
 	cd ..
@@ -100,6 +100,10 @@ find $SCRIPTPATH/index.html -exec sed -i 's/<\/yt:videoId>/" ><\/a>/g' {} \;
 
 #ITEM
 find $SCRIPTPATH/index.html -exec sed -i 's/entry/item/g' {} \;
+
+#DATE
+find $SCRIPTPATH/index.html -exec sed -i 's/T.*<\/published/<\/published/g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i -e :1 -e 's@\(<published>.*\)-\(.*</published>\)@\1 \◦ \2@;t1' {} \;
 
 #THUMB
 find $SCRIPTPATH/index.html -exec sed -i 's/media:thumbnail url/img class="lozad" data-src/g' {} \;

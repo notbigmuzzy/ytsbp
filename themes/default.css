@@ -195,6 +195,20 @@ section > title {
 	line-height: 1.25;
 }
 
+section > title + published {
+	display: none;
+}
+
+section item published {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: white;
+    padding: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
 section item a {
 	display: block;
 	position: absolute;
@@ -223,6 +237,10 @@ section item title {
 
 section item:hover title {
 	opacity: 1;
+}
+
+section item:hover published {
+	opacity: 0;
 }
 
 .section-title {
@@ -290,6 +308,6 @@ section item img {
 	display: none;
 }
 
-.latest section > title + item {
+.latest section > title + published + item {
 	display: block;
 }
