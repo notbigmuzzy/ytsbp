@@ -106,5 +106,5 @@ find $SCRIPTPATH/index.html -exec sed -i 's/T.*<\/published/<\/published/g' {} \
 find $SCRIPTPATH/index.html -exec sed -i -e :1 -e 's@\(<published>.*\)-\(.*</published>\)@\1 \◦ \2@;t1' {} \;
 
 #THUMB
-find $SCRIPTPATH/index.html -exec sed -i 's/media:thumbnail url/img class="lozad" data-src/g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/media:thumbnail url/img class="lozad" data-toggle-class="loaded" data-src/g' {} \;
 echo 'DONE!';
