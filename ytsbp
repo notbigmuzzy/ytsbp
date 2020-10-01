@@ -1,6 +1,7 @@
 #VARS
 SCRIPTPATH=$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 THEME=default
+USE_BACKGROUND=dark # possible values - no, dark, color, all
 echo 'GETTING XML';
  
 #PREP FILE
@@ -9,11 +10,11 @@ touch $SCRIPTPATH/index.html
 
 #OPEN BODY
 echo "<!DOCTYPE html><html id='html'><head><title>☛ ☈☉☊☌☡ ☚</title><link rel='shortcut icon' href='favicon.ico'><link type='text/css' rel='stylesheet' href='themes/$THEME.css'><link type='text/css' rel='stylesheet' href='themes/patterns.css'><script type='text/javascript' src='https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js'></script>
-</head><body id='body' class='" >> $SCRIPTPATH/index.html
+</head><body id='body' class='$USE_BACKGROUND" >> $SCRIPTPATH/index.html
 
 
 RAND=$((1 + RANDOM % 40));
-if [ $RAND -eq 1 ]; then echo 'one'; elif [ $RAND -eq 2 ]; then echo 'two'; elif [ $RAND -eq 3 ]; then echo 'three';elif [ $RAND -eq 4 ]; then echo 'four';elif [ $RAND -eq 5 ]; then echo 'five';elif [ $RAND -eq 6 ]; then echo 'six';elif [ $RAND -eq 7 ]; then echo 'eleven';elif [ $RAND -eq 8 ]; then echo 'eight';elif [ $RAND -eq 9 ]; then echo 'nine';elif [ $RAND -eq 10 ]; then echo 'ten';elif [ $RAND -eq 11 ]; then echo 'eleven';elif [ $RAND -eq 12 ]; then echo 'twelve';elif [ $RAND -eq 13 ]; then echo 'thirteen';elif [ $RAND -eq 14 ]; then echo 'fourteen';elif [ $RAND -eq 15 ]; then echo 'fifteen';elif [ $RAND -eq 16 ]; then echo 'sixteen';elif [ $RAND -eq 17 ]; then echo 'seventeen';elif [ $RAND -eq 18 ]; then echo 'eighteen';elif [ $RAND -eq 19 ]; then echo 'nineteen';elif [ $RAND -eq 20 ]; then echo 'twenty';elif [ $RAND -eq 21 ]; then echo 'ttone';elif [ $RAND -eq 22 ]; then echo 'tttwo';elif [ $RAND -eq 23 ]; then echo 'ttthree';elif [ $RAND -eq 24 ]; then echo 'eleven';elif [ $RAND -eq 25 ]; then echo 'eleven';elif [ $RAND -eq 26 ]; then echo 'eleven';elif [ $RAND -eq 27 ]; then echo 'ttseven';elif [ $RAND -eq 28 ]; then echo 'tteight';elif [ $RAND -eq 29 ]; then echo 'eleven';elif [ $RAND -eq 30 ]; then echo 'thirty';elif [ $RAND -eq 31 ]; then echo 'tttone';elif [ $RAND -eq 32 ]; then echo 'ttttwo';elif [ $RAND -eq 33 ]; then echo 'tttthree';elif [ $RAND -eq 34 ]; then echo 'tttfour';elif [ $RAND -eq 35 ]; then echo 'tttfive';elif [ $RAND -eq 36 ]; then echo 'tttsix';elif [ $RAND -eq 37 ]; then echo 'tttseven';elif [ $RAND -eq 38 ]; then echo 'ttteight';elif [ $RAND -eq 39 ]; then echo 'tttnine';elif [ $RAND -eq 40 ]; then echo 'fourty'; else echo 'eleven'; fi >> $SCRIPTPATH/index.html &&
+if [ $RAND -eq 1 ]; then echo 'one'; elif [ $RAND -eq 2 ]; then echo 'two'; elif [ $RAND -eq 3 ]; then echo 'three';elif [ $RAND -eq 4 ]; then echo 'four';elif [ $RAND -eq 5 ]; then echo 'five';elif [ $RAND -eq 6 ]; then echo 'six';elif [ $RAND -eq 7 ]; then echo 'seven';elif [ $RAND -eq 8 ]; then echo 'eight';elif [ $RAND -eq 9 ]; then echo 'nine';elif [ $RAND -eq 10 ]; then echo 'ten';elif [ $RAND -eq 11 ]; then echo 'eleven';elif [ $RAND -eq 12 ]; then echo 'twelve';elif [ $RAND -eq 13 ]; then echo 'thirteen';elif [ $RAND -eq 14 ]; then echo 'fourteen';elif [ $RAND -eq 15 ]; then echo 'fifteen';elif [ $RAND -eq 16 ]; then echo 'sixteen';elif [ $RAND -eq 17 ]; then echo 'seventeen';elif [ $RAND -eq 18 ]; then echo 'eighteen';elif [ $RAND -eq 19 ]; then echo 'nineteen';elif [ $RAND -eq 20 ]; then echo 'twenty';elif [ $RAND -eq 21 ]; then echo 'ttone';elif [ $RAND -eq 22 ]; then echo 'tttwo'; elif [ $RAND -eq 27 ]; then echo 'ttseven';elif [ $RAND -eq 28 ]; then echo 'tteight';elif [ $RAND -eq 29 ]; then echo 'ttnine';elif [ $RAND -eq 30 ]; then echo 'thirty';elif [ $RAND -eq 31 ]; then echo 'tttone';elif [ $RAND -eq 32 ]; then echo 'ttttwo';elif [ $RAND -eq 33 ]; then echo 'tttthree';elif [ $RAND -eq 34 ]; then echo 'tttfour';elif [ $RAND -eq 35 ]; then echo 'tttfive';elif [ $RAND -eq 36 ]; then echo 'tttsix';elif [ $RAND -eq 37 ]; then echo 'tttseven';elif [ $RAND -eq 38 ]; then echo 'ttteight';elif [ $RAND -eq 39 ]; then echo 'tttnine';elif [ $RAND -eq 40 ]; then echo 'fourty'; else echo '$USE_BACKGROUND'; fi >> $SCRIPTPATH/index.html &&
 
 echo "'>" >> $SCRIPTPATH/index.html
 

@@ -202,7 +202,6 @@ section > title {
 	margin-right: 20px;
 	min-width: 200px;
 	height: 275px;
-    backdrop-filter: saturate(180%) blur(7px);
     background: rgba(0,0,0,.7);
 	color: rgba(255,255,255,0.85);
 	font-weight: bold;
@@ -270,9 +269,7 @@ section item:hover published {
 }
 
 .section-title span {
-    backdrop-filter: saturate(180%) blur(7px);
-    background: rgba(0,0,0,.7);
-    padding: 10px;
+	color: white;
 }
 
 section item img {
