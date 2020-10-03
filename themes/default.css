@@ -331,16 +331,20 @@ section item .lozad.loaded {
 	z-index: 20;
 }
 
-.latest section {
-	flex-direction: row-reverse;
-    justify-content: flex-end;
-}
-
 .latest section channel {
+	   flex: 1 1 auto;
+
 	position: relative;
     margin-right: 20px;
     min-width: 500px;
     height: 275px;
+    overflow-x: auto;
+}
+
+.latest section channel item {
+	position: relative;
+    width: 1005;
+    height: 100%;
     color: rgba(255, 255, 255, 0.25);
     border-radius: 4px;
     overflow: hidden;
