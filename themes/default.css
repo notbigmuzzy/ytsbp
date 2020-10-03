@@ -331,12 +331,29 @@ section item .lozad.loaded {
 	z-index: 20;
 }
 
-.latest section > title,
-.latest section item {
+.latest section {
+	flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.latest section channel {
+	position: relative;
+    margin-right: 20px;
+    min-width: 500px;
+    height: 275px;
+    color: rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0px 0px 8px -4px black;
+}
+
+.latest section channel > title,
+.latest section channel > published,
+.latest section channel item {
 	display: none;
 }
 
-.latest section > title + published + item {
+.latest section channel item:first-of-type {
 	display: block;
 }
 

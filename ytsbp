@@ -1,7 +1,7 @@
 #VARS
 SCRIPTPATH=$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 THEME=default
-USE_BACKGROUND=dark # possible values - no, dark, color, all
+USE_BACKGROUND=color # possible values - no, dark, color, all
 echo 'GETTING XML';
  
 #PREP FILE
@@ -61,13 +61,16 @@ echo "<section>" >> $SCRIPTPATH/index.html
 for d in `find * -type d`
 do
 	cd $d
+	echo "<channel>" >> $SCRIPTPATH/index.html
 		for f in `find * -type f`
 		do
 			URL=$(cat $f);
-			grep $f -e \<entry\> -e \<yt:videoId\> -e \<title\> -e media:thumbnail -e published	-e \</entry\>  >> $SCRIPTPATH/index.html
+			grep $f -e \<entry\> -e media:thumbnail -e \<yt:videoId\> -e \<title\> -e published	-e \</entry\>  >> $SCRIPTPATH/index.html
 		done
+	echo "</channel>" >> $SCRIPTPATH/index.html
 	cd ..
 done
+echo "<script>let channel=document.querySelectorAll('channel'); channel.forEach(function(element,index){let item=element.getElementsByTagName('item')[0];let date=element.getElementsByTagName('published')[0].innerHTML;date=date.replace(' ◦ ','').replace(' ◦ ','');element.style.order=date});</script>" >> $SCRIPTPATH/index.html
 echo "</section>" >> $SCRIPTPATH/index.html
 echo "</div>" >> $SCRIPTPATH/index.html
 cd $SCRIPTPATH
