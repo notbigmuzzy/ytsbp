@@ -95,7 +95,7 @@ done
 cd $SCRIPTPATH
 
 #ADD EMPTY IFRAME
-echo "<iframe id='iframe-popup' src='' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><a href='#' id='iframe-close'>✕</a>" >> $SCRIPTPATH/index.html
+echo "<iframe id='iframe-popup' src='' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><a href='#' id='iframe-minimize'>-</a><a href='#' id='iframe-close'>✕</a>" >> $SCRIPTPATH/index.html
 #CLOSE BODY
 echo "</body>" >> $SCRIPTPATH/index.html
 #INCLUDE JS
@@ -105,8 +105,8 @@ echo "</html>" >> $SCRIPTPATH/index.html
 
 echo 'SANITIZING';
 #CREATE LINK TO EMBED
-find $SCRIPTPATH/index.html -exec sed -i 's/<yt:videoId>/<a class="iframe-source" href="https:\/\/www.youtube.com\/embed\//g' {} \;
-find $SCRIPTPATH/index.html -exec sed -i 's/<\/yt:videoId>/?rel=0" ><\/a>/g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/<yt:videoId>/<p class="iframe-source" data-iframe-source="iframe-source" href="https:\/\/www.youtube.com\/embed\//g' {} \;
+find $SCRIPTPATH/index.html -exec sed -i 's/<\/yt:videoId>/?rel=0" ><\/p>/g' {} \;
 
 #ITEM
 find $SCRIPTPATH/index.html -exec sed -i 's/entry/item/g' {} \;

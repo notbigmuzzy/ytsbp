@@ -186,6 +186,7 @@ section item {
 	position: relative;
 	margin-right: 20px;
 	min-width: 500px;
+	max-width: 500px;
 	height: 275px;
 	color: rgba(255, 255, 255, 0.25);
 	border-radius: 4px;
@@ -225,7 +226,7 @@ section item published {
     text-shadow: 0 0 8px #000;
 }
 
-section item a {
+section item .iframe-source {
 	display: block;
 	position: absolute;
 	top: 0;
@@ -298,7 +299,24 @@ section item .lozad.loaded {
 	z-index: -1;
 }
 
-#iframe-close {
+#iframe-popup.minimized {
+	top: auto;
+	left: auto;
+	right: 0;
+	bottom: 0;
+	width: 500px;
+	height: 305px;
+	border-top: 30px solid transparent;
+}
+
+#iframe-popup.minimized:hover {
+	cursor: nw-resize;
+	border-top: 30px solid transparent;
+	backdrop-filter: saturate(180%) blur(7px);
+	background: rgba(229,35,37,1);
+}
+
+#iframe-close, #iframe-minimize {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -315,25 +333,39 @@ section item .lozad.loaded {
 	border-bottom-left-radius: 100%;
 }
 
-#iframe-close:hover {
+#iframe-minimize {
+	right: auto;
+	left: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 100%;
+	padding: 30px 50px 50px 30px;
+}
+
+#iframe-close:hover, #iframe-minimize:hover {
 	opacity: 1;
 }
 
-#iframe-popup.show {
+#iframe-popup.show, #iframe-minimize.show {
 	visibility: visible;
 	pointer-events: initial;
 	z-index: 15;
 }
 
-#iframe-popup.show + #iframe-close {
+#iframe-popup.show ~ #iframe-close, #iframe-popup.show ~ #iframe-minimize {
 	visibility: visible;
 	pointer-events: initial;
 	z-index: 20;
 }
 
-.latest section channel {
-	   flex: 1 1 auto;
+#iframe-popup.minimized ~ #iframe-close, #iframe-popup.minimized ~ #iframe-minimize {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	z-index: -1;
+}
 
+.latest section channel {
+	flex: 1 1 auto;
 	position: relative;
     margin-right: 20px;
     min-width: 500px;

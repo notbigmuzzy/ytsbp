@@ -9,7 +9,6 @@ document.addEventListener('click', function (event) {
     if (!event.target.matches('.iframe-source')) {
         return
     }
-    event.preventDefault();
     let iframeLink = event
         .target
         .getAttribute('href');
@@ -19,13 +18,37 @@ document.addEventListener('click', function (event) {
     iframePopup.src = iframeLink
 }, false);
 document.addEventListener('click', function (event) {
+    if (!event.target.matches('#iframe-popup')) {
+        return
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    iframePopup
+        .classList  
+        .remove('minimized');
+}, false);
+document.addEventListener('click', function (event) {
+    if (!event.target.matches('#iframe-minimize')) {
+        return
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    iframePopup
+        .classList  
+        .add('minimized');
+}, false);
+document.addEventListener('click', function (event) {
     if (!event.target.matches('#iframe-close')) {
         return
     }
     event.preventDefault();
+    event.stopPropagation();
     iframePopup
         .classList
         .remove('show');
+    iframePopup
+        .classList
+        .remove('minimized');
     iframePopup.src = ''
 }, false);
 document.addEventListener('keydown', event => {
