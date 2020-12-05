@@ -32,27 +32,6 @@
 }
 
 /*DARK*/
-.all.eight, .dark.eight {
-	background:
-	radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent),
-	radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px,
-	linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px,
-	linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0;
-	background-color: slategray;
-	background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;" title="Cross"></li>
-		<li style="background:
-	radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
-	radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
-	radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
-	radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
-	radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
-	radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
-	radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
-	radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
-	background-color:#63773F;
-	background-size:100px 100px;
-}
-
 .all.ten, .dark.ten {
 	background:
 	linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
@@ -73,25 +52,6 @@
 	radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
 	background-color:#282828;
 	background-size:16px 16px;
-}
-
-.all.seventeen, .dark.seventeen {
-	background:
-	linear-gradient(324deg, #232927 4%,   transparent 4%) -70px 43px,
-	linear-gradient( 36deg, #232927 4%,   transparent 4%) 30px 43px,
-	linear-gradient( 72deg, #e3d7bf 8.5%, transparent 8.5%) 30px 43px,
-	linear-gradient(288deg, #e3d7bf 8.5%, transparent 8.5%) -70px 43px,
-	linear-gradient(216deg, #e3d7bf 7.5%, transparent 7.5%) -70px 23px,
-	linear-gradient(144deg, #e3d7bf 7.5%, transparent 7.5%) 30px 23px,
-
-	linear-gradient(324deg, #232927 4%,   transparent 4%) -20px 93px,
-	linear-gradient( 36deg, #232927 4%,   transparent 4%) 80px 93px,
-	linear-gradient( 72deg, #e3d7bf 8.5%, transparent 8.5%) 80px 93px,
-	linear-gradient(288deg, #e3d7bf 8.5%, transparent 8.5%) -20px 93px,
-	linear-gradient(216deg, #e3d7bf 7.5%, transparent 7.5%) -20px 73px,
-	linear-gradient(144deg, #e3d7bf 7.5%, transparent 7.5%) 80px 73px;
-	background-color: #232927;
-	background-size: 100px 100px;
 }
 
 /*COLOR*/
@@ -153,6 +113,27 @@
 	linear-gradient(-45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0;
 	background-color: #300;
 	background-size: 100px 100px;,
+}
+
+.all.eight, .color.eight {
+	background:
+	radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent),
+	radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px,
+	linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px,
+	linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0;
+	background-color: slategray;
+	background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;" title="Cross"></li>
+		<li style="background:
+	radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
+	radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
+	radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
+	radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
+	radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
+	radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
+	radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
+	radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
+	background-color:#63773F;
+	background-size:100px 100px;
 }
 
 .all.nine, .color.nine {
