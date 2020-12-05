@@ -368,19 +368,38 @@ section item .lozad.loaded {
 	flex: 1 1 auto;
 	position: relative;
     margin-right: 20px;
-    min-width: 500px;
-    height: 275px;
+	min-width: 500px;
+	max-width: 500px;
+    height: auto;
     overflow-x: auto;
 }
 
 .latest section channel item {
 	position: relative;
-    width: 1005;
+    width: 100%;
     height: 100%;
     color: rgba(255, 255, 255, 0.25);
     border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0px 0px 8px -4px black;
+	box-shadow: 0px 0px 8px -4px black;
+	flex-direction: column;
+	background-color: rgba(0,0,0,.7);
+}
+
+.latest section channel item img {
+	height: 275px;
+}
+
+.latest section channel item title {
+	order: 20;
+	position: relative;
+	opacity: 1;
+	line-height: 1.5;
+	padding-bottom: 60px;
+}
+
+.latest section item published {
+	opacity: 1;
 }
 
 .latest section channel > title,
@@ -390,9 +409,9 @@ section item .lozad.loaded {
 }
 
 .latest section channel item:first-of-type {
-	display: block;
+	display: flex;
 }
 
-.iframe-source:focus {
+.iframe-source:hover {
 	border: 4px solid #e52325;
 }

@@ -1,7 +1,7 @@
 #VARS
 SCRIPTPATH=$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 THEME=default
-USE_BACKGROUND=color # possible values - no, dark, color, all
+USE_BACKGROUND=dark # possible values - no, dark, color, all
 echo 'GETTING XML';
  
 #PREP FILE
