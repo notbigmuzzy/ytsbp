@@ -410,6 +410,7 @@ section item .lozad.loaded {
 
 .latest section channel item:first-of-type {
 	display: flex;
+	color: transparent;
 }
 
 .iframe-source:hover {
