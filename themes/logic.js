@@ -1,14 +1,15 @@
 //INIT LAZY LOAD
 const observer = lozad();
 observer.observe();
-
 //IFRAME POPUP
 let iframePopup = document.getElementById('iframe-popup');
 let iframeClose = document.getElementById('iframe-close');
+
 document.addEventListener('click', function (event) {
     if (!event.target.matches('.iframe-source')) {
         return
     }
+    event.preventDefault();
     let iframeLink = event
         .target
         .getAttribute('href');
