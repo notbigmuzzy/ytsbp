@@ -75,6 +75,11 @@ document.addEventListener('click', function (event) {
           clickedCat = clickedSection.parentNode,
           clickedSectionData = clickedSection.dataset.section;
 
+    if (clickedCat.getAttribute('id') == 'latest') {
+        event.preventDefault();
+        return;
+    }
+
     if (clickedCat.getAttribute('id') == 'pinned') {
         fragmentAll = document.createDocumentFragment();
         fragmentAll.appendChild(clickedSection);
@@ -86,6 +91,7 @@ document.addEventListener('click', function (event) {
         pinnedSection.appendChild(fragmentPin);
         localStorage.setItem(clickedSectionData, 1);
     }
+
 }, false);
 
 //MOVE TO PINNED ON LOAD

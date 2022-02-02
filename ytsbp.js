@@ -5,6 +5,12 @@ const 	fs = require('fs'),
 		indexFile = './index.html',
 		tempDirectory = './tmp',
 		subsFile = './subscriptions.csv';
+const { XMLParser, XMLBuilder, XMLValidator} = require("./node_modules/fast-xml-parser/src/fxp");
+const xmlParserOptions = {
+	removeNSPrefix: true,
+	ignoreAttributes: false
+};
+const parser = new XMLParser(xmlParserOptions);
 
 //APPEND TO FILE FUNCTION
 function write(text) {
@@ -60,20 +66,53 @@ function getXMLFilesFromYT() {
 function generateIndexHTMLFile() {
 	generateHeader();
 	generateSidebar();
-	generatePinned();
-	generateChannelView();
+	generateLatest();
 	generateFooter();
 }
 
 //OG - CHANNEL VIEW
-function generateChannelView() {
-	const { XMLParser, XMLBuilder, XMLValidator} = require("./node_modules/fast-xml-parser/src/fxp");
-	const xmlParserOptions = {
-		removeNSPrefix: true,
-		ignoreAttributes: false
-	};
-	const parser = new XMLParser(xmlParserOptions);
+function generateLatest() {
+	fs.readdir(tempDirectory, (err, filesLatest) => {
+		var noOfFilesLatest = 1;
+		filesLatest.forEach(function(file, index)  {
+			if (index == 0) {
+				write('<div class="category" id="latest"><p class="section-title"><span>Latest</span></p>')
+				write('<section class="whole-section" id="latestSection" data-section="latestSection"><div class="section-title" style="background-color:#666;"><a class="pin-section section-title-link" href="#pinned"><h3>Latest</br>Videos</h3></a></div>')
+			}
 
+			const 	thisFile = fs.readFileSync(tempDirectory + '/' + file,{encoding:'utf8', flag:'r'}),
+					objectified = parser.parse(thisFile),
+					entries = objectified.feed.entry,
+					channelColor = Math.floor(Math.random()*16777215).toString(16);
+
+				channelTitle = objectified.feed.title;
+				channelURL = objectified.feed.author.uri;
+				authorName = objectified.feed.author.name;
+
+				var noOfEntries = 1;
+				entries.forEach(function (value, index) {
+					if (index == 0) {
+						const 	entryInfo = value,
+								videoID = entryInfo.id.slice(9),
+								videoTitle = entryInfo.title,
+								videoImg = entryInfo.group.thumbnail["@_url"],
+								videoDescription = entryInfo.group.description
+
+						write('<item><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p></item>');
+					}
+				})
+
+			if (noOfFilesLatest == filesLatest.length) {
+				write('</section></div>');
+				generatePinned();
+			}
+			noOfFilesLatest++;
+		});	
+	});
+}
+
+//OG - CHANNEL VIEW
+function generateChannelView() {
 	fs.readdir(tempDirectory, (err, files) => {
 		var noOfFiles = 1;
 		files.forEach(function(file, index)  {
@@ -99,8 +138,7 @@ function generateChannelView() {
 					const 	entryInfo = value,
 							videoID = entryInfo.id.slice(9),
 							videoTitle = entryInfo.title,
-							videoImg = entryInfo.group.thumbnail["@_url"],
-							videoDescription = entryInfo.group.description
+							videoImg = entryInfo.group.thumbnail["@_url"];
 
 					write('<item><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
 
@@ -111,7 +149,7 @@ function generateChannelView() {
 				})
 
 			if (noOfFiles == files.length) {
-				write('</category>');
+				write('</div>');
 			}
 			noOfFiles++;
 		});	
@@ -130,7 +168,8 @@ function generateSidebar() {
 
 //OG - PINNED
 function generatePinned() {
-	write('<div class="category" id="pinned"><p class="section-title"><span>Pinned</span></p></category>')
+	write('<div class="category" id="pinned"><p class="section-title"><span>Pinned</span></p></div>')
+	generateChannelView();
 }
 
 //OG - FOOTER
