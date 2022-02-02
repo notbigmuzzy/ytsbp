@@ -77,7 +77,7 @@ function generateLatest() {
 		filesLatest.forEach(function(file, index)  {
 			if (index == 0) {
 				write('<div class="category" id="latest"><p class="section-title"><span>Latest</span></p>')
-				write('<section class="whole-section" id="latestSection" data-section="latestSection"><div class="section-title" style="background-color:#666;"><a class="pin-section section-title-link" href="#pinned"><h3>Latest</br>Videos</h3></a></div>')
+				write('<section class="whole-section" id="latestSection" data-section="latestSection"><div style="order:-999999999999" class="section-title" style="background-color:#666;"><a class="pin-section section-title-link" href="#pinned"><h3>Latest</br>Videos</h3></a></div>')
 			}
 
 			const 	thisFile = fs.readFileSync(tempDirectory + '/' + file,{encoding:'utf8', flag:'r'}),
@@ -96,9 +96,10 @@ function generateLatest() {
 								videoID = entryInfo.id.slice(9),
 								videoTitle = entryInfo.title,
 								videoImg = entryInfo.group.thumbnail["@_url"],
-								videoDescription = entryInfo.group.description
+								videoDescription = entryInfo.group.description,
+								itemOrdering = entryInfo.updated.substring(0,10).replace(/\-/g, '');
 
-						write('<item><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p></item>');
+						write('<item style="order:-' + itemOrdering + '"><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p></item>');
 					}
 				})
 

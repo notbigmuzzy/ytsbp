@@ -245,6 +245,7 @@ section .section-title-link {
 section .section-title-link h3 {
 	pointer-events: none;
 	font-size: 26px;
+	word-break: break-word;
 }
 
 section .section-title-link:hover {
