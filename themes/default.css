@@ -406,6 +406,7 @@ section item .lozad.loaded {
 	visibility: hidden;
 	pointer-events: none;
 	z-index: -1;
+	background-color: #000;
 }
 
 #iframe-popup.minimized {
@@ -458,6 +459,7 @@ section item .lozad.loaded {
 	visibility: visible;
 	pointer-events: initial;
 	z-index: 15;
+	background-color: #000;
 }
 
 #iframe-popup.show ~ #iframe-close, #iframe-popup.show ~ #iframe-minimize {
