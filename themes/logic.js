@@ -1,6 +1,9 @@
 //INIT LAZY LOAD
-const observer = lozad();
-observer.observe();
+document.addEventListener("DOMContentLoaded", function() {
+    const observer = lozad();
+    observer.observe();
+});
+
 //IFRAME POPUP
 let iframePopup = document.getElementById('iframe-popup');
 let iframeClose = document.getElementById('iframe-close');

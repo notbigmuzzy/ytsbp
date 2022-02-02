@@ -185,9 +185,9 @@ section + section {
 section item {
 	position: relative;
 	margin-right: 20px;
-	min-width: 500px;
-	max-width: 500px;
-	height: 275px;
+	min-width: 320px;
+	max-width: 320px;
+	height: 180px;
 	color: rgba(255, 255, 255, 0.25);
 	border-radius: 4px;
     overflow: hidden;
@@ -201,8 +201,8 @@ section > title {
 	font-family: sans-serif;
 	position: relative;
 	margin-right: 20px;
-	min-width: 200px;
-	height: 275px;
+	min-width: 180px;
+	height: 180px;
     background: #111;
 	color: rgba(255,255,255,0.85);
 	font-weight: bold;
