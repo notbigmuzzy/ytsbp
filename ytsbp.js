@@ -86,7 +86,7 @@ function generateChannelView() {
 			channelURL = objectified.feed.author.uri;
 			authorName = objectified.feed.author.name;
 
-			write('<section><title style="background-color:#' + channelColor + ';">' + authorName + '</title>')
+			write('<section><div class="section-title" style="background-color:#' + channelColor + ';"><a target="_blank" class="section-title-link" href="' + channelURL + '"><h3>' + authorName + '</h3></a></div>')
 
 			entries.forEach(function (value, index) {
 				const 	entryInfo = value,
