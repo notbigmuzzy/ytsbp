@@ -283,7 +283,12 @@ section .section-title-link:hover:after {
 
 #latest section item title {
 	padding-bottom: 45px;
-  font-size: 18px;
+  font-size: 24px;
+  opacity: 1;
+}
+
+#latest section item:hover title {
+  opacity: 0;
 }
 
 #latest section item:after {
@@ -305,12 +310,16 @@ section .section-title-link:hover:after {
 	padding: 10px;
 	color: #fff;
 	line-height: 1.25;
-	font-size: 18px;
+	font-size: 20px;
 	font-family: sans-serif;
 }
 
+#latest section item p {
+	opacity: 0.1;
+}
+
 #latest section item:hover p {
-	opacity: 0.25;
+	opacity: 1;
 }
 
 
