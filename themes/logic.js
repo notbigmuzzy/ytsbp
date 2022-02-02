@@ -1,5 +1,6 @@
 //INIT LAZY LOAD
 document.addEventListener("DOMContentLoaded", function() {
+    moveToPinnedOnLoad();
     const observer = lozad();
     observer.observe();
 });
@@ -63,6 +64,53 @@ document.addEventListener('keydown', event => {
         iframePopup.src = ''
     }
 });
+document.addEventListener('click', function (event) {
+    if (!event.target.matches('.pin-section')) {
+        return
+    }
+
+    const pinnedSection = document.getElementById('pinned'),
+          allSection = document.getElementById('subscriptions'),
+          clickedSection = event.target.parentNode.parentNode,
+          clickedCat = clickedSection.parentNode,
+          clickedSectionData = clickedSection.dataset.section;
+
+    if (clickedCat.getAttribute('id') == 'pinned') {
+        fragmentAll = document.createDocumentFragment();
+        fragmentAll.appendChild(clickedSection);
+        allSection.appendChild(fragmentAll);
+        localStorage.removeItem(clickedSectionData);
+    } else {
+        fragmentPin = document.createDocumentFragment();
+        fragmentPin.appendChild(clickedSection);
+        pinnedSection.appendChild(fragmentPin);
+        localStorage.setItem(clickedSectionData, 1);
+    }
+}, false);
+
+//MOVE TO PINNED ON LOAD
+function moveToPinnedOnLoad() {
+    var archive = [],
+        keys = Object.keys(localStorage),
+        i = 0, 
+        key;
+
+    for (; key = keys[i]; i++) {
+        archive.push( key );
+    }
+
+    if (archive.length) {
+        archive.forEach(function(value) {
+            var thisSection = document.getElementById(value),
+                pinnedSection = document.getElementById('pinned');
+
+            fragmentAutoPin = document.createDocumentFragment();
+            fragmentAutoPin.appendChild(thisSection);
+            pinnedSection.appendChild(fragmentAutoPin);
+            localStorage.setItem(value, 1);
+        })
+    }
+}
 
 //FILTER
 document.addEventListener('DOMContentLoaded', function () {

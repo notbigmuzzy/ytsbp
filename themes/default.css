@@ -165,6 +165,10 @@ nav #search-input:-ms-input-placeholder {
 	padding: 0;
 }
 
+.links .sidebar-pinned {
+	/*display: none;*/
+}
+
 section {
 	display: flex;
 	overflow-x: auto;
@@ -185,9 +189,9 @@ section + section {
 section item {
 	position: relative;
 	margin-right: 20px;
-	min-width: 320px;
-	max-width: 320px;
-	height: 180px;
+	min-width: 352px;
+	max-width: 352px;
+	height: 196px;
 	color: rgba(255, 255, 255, 0.25);
 	border-radius: 4px;
     overflow: hidden;
@@ -201,8 +205,8 @@ section .section-title {
 	font-family: sans-serif;
 	position: relative;
 	margin-right: 20px;
-	min-width: 180px;
-	height: 180px;
+	min-width: 196px;
+	height: 196px;
   background: #111;
 	color: rgba(255,255,255,0.85);
 	font-weight: bold;
@@ -230,12 +234,14 @@ section .section-title-link {
 	color: #fff;
 	text-decoration: none;
 	height: 100%;
+	width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 section .section-title-link h3 {
+	pointer-events: none;
 	font-size: 26px;
 }
 

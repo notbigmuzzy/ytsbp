@@ -60,6 +60,7 @@ function getXMLFilesFromYT() {
 function generateIndexHTMLFile() {
 	generateHeader();
 	generateSidebar();
+	generatePinned();
 	generateChannelView();
 	generateFooter();
 }
@@ -73,36 +74,48 @@ function generateChannelView() {
 	};
 	const parser = new XMLParser(xmlParserOptions);
 
-	write('<div class="category"><p class="section-title" id="subscriptions"><span>All Subscriptions</span></p>')
-
 	fs.readdir(tempDirectory, (err, files) => {
-		files.forEach(file => {
+		var noOfFiles = 1;
+		files.forEach(function(file, index)  {
+			if (index == 0) {
+				write('<div class="category" id="subscriptions"><p class="section-title"><span>All Subscriptions</span></p>')
+			}
+
 			const 	thisFile = fs.readFileSync(tempDirectory + '/' + file,{encoding:'utf8', flag:'r'}),
 					objectified = parser.parse(thisFile),
 					entries = objectified.feed.entry,
 					channelColor = Math.floor(Math.random()*16777215).toString(16);
 
-			channelTitle = objectified.feed.title;
-			channelURL = objectified.feed.author.uri;
-			authorName = objectified.feed.author.name;
+				channelTitle = objectified.feed.title;
+				channelURL = objectified.feed.author.uri;
+				authorName = objectified.feed.author.name;
 
-			write('<section><div class="section-title" style="background-color:#' + channelColor + ';"><a target="_blank" class="section-title-link" href="' + channelURL + '"><h3>' + authorName + '</h3></a></div>')
+				var noOfEntries = 1;
+				entries.forEach(function (value, index) {
+					if (index == 0) {
+						write('<section class="whole-section" id="' + channelTitle + '" data-section="' + channelTitle + '"><div class="section-title" style="background-color:#' + channelColor + ';"><a class="pin-section section-title-link" href="#pinned"><h3>' + authorName + '</h3></a></div>')
+					}
 
-			entries.forEach(function (value, index) {
-				const 	entryInfo = value,
-						videoID = entryInfo.id.slice(9),
-						videoTitle = entryInfo.title,
-						videoImg = entryInfo.group.thumbnail["@_url"],
-						videoDescription = entryInfo.group.description
+					const 	entryInfo = value,
+							videoID = entryInfo.id.slice(9),
+							videoTitle = entryInfo.title,
+							videoImg = entryInfo.group.thumbnail["@_url"],
+							videoDescription = entryInfo.group.description
 
-				write('<item><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
-			})
+					write('<item><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
 
-			write('</section>')
-		});
+					if (noOfEntries == entries.length) {
+						write('</section>')
+					}
+					noOfEntries++;
+				})
+
+			if (noOfFiles == files.length) {
+				write('</category>');
+			}
+			noOfFiles++;
+		});	
 	});
-
-	write('</category>');
 }
 
 //OG - HEADER
@@ -112,7 +125,12 @@ function generateHeader() {
 
 //OG - SIDEBAR
 function generateSidebar() {
-	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a href="#subscriptions"><span>Subs</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
+	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a class="sidebar-pinned" href="#pinned"><span>Pinned</span></a> <a href="#subscriptions"><span>All</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
+}
+
+//OG - PINNED
+function generatePinned() {
+	write('<div class="category" id="pinned"><p class="section-title"><span>Pinned</span></p></category>')
 }
 
 //OG - FOOTER
