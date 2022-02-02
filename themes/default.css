@@ -211,7 +211,7 @@ section .section-title {
 	color: rgba(255,255,255,0.85);
 	font-weight: bold;
 	text-align: center;
-	padding: 0 5px;
+	padding: 0;
 	line-height: 1.25;
 	word-break: break-all;
 	font-size: 26px;
@@ -238,11 +238,29 @@ section .section-title-link {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0,0,0,.6);
+  transition: background-color 0.25s;
 }
 
 section .section-title-link h3 {
 	pointer-events: none;
 	font-size: 26px;
+}
+
+section .section-title-link:hover {
+	background-color: rgba(0,0,0,.2);
+}
+
+section .section-title-link:hover h3 {
+	display: none;
+}
+
+section .section-title-link:hover:after {
+	content: 'PIN';
+}
+
+#pinned section .section-title-link:hover:after {
+	content: 'UNPIN';
 }
 
 section item published {
