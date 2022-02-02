@@ -4,7 +4,7 @@ const 	fs = require('fs'),
 		https = require('https'),
 		indexFile = './index.html',
 		tempDirectory = './tmp',
-		subsFile = './subscriptions-full.csv';
+		subsFile = './subscriptions.csv';
 
 //APPEND TO FILE FUNCTION
 function write(text) {
@@ -79,13 +79,14 @@ function generateChannelView() {
 		files.forEach(file => {
 			const 	thisFile = fs.readFileSync(tempDirectory + '/' + file,{encoding:'utf8', flag:'r'}),
 					objectified = parser.parse(thisFile),
-					entries = objectified.feed.entry;
+					entries = objectified.feed.entry,
+					channelColor = Math.floor(Math.random()*16777215).toString(16);
 
 			channelTitle = objectified.feed.title;
 			channelURL = objectified.feed.author.uri;
 			authorName = objectified.feed.author.name;
 
-			write('<section><title>' + authorName + '</title>')
+			write('<section><title style="background-color:#' + channelColor + ';">' + authorName + '</title>')
 
 			entries.forEach(function (value, index) {
 				const 	entryInfo = value,

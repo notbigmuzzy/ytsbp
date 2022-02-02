@@ -203,12 +203,18 @@ section > title {
 	margin-right: 20px;
 	min-width: 180px;
 	height: 180px;
-    background: #111;
+   background: #111;
 	color: rgba(255,255,255,0.85);
 	font-weight: bold;
 	text-align: center;
 	padding: 0 5px;
 	line-height: 1.25;
+	overflow: hidden;
+	font-size: 26px;
+	text-shadow: 5px 3px #111;
+	background-image: radial-gradient(rgb(255 255 255 / 15%) 15%, transparent 16%), radial-gradient(rgb(255 255 255 / 15%) 15%, transparent 16%);
+ 	background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
 }
 
 section > title + published {
