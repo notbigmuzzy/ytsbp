@@ -320,7 +320,7 @@ section .section-title-link:hover:after {
 	line-height: 1.25;
 	font-size: 20px;
 	font-family: sans-serif;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 #latest section item p {
@@ -508,6 +508,7 @@ section item img {
 
 section item .lozad {
 	opacity: 0.25;
+	transition: opacity 0.5s;
 }
 
 section item .lozad.loaded {
@@ -534,7 +535,8 @@ section item .lozad.loaded {
 	bottom: 0;
 	width: 500px;
 	height: 305px;
-	border-top: 30px solid transparent;
+	border-top: 30px solid #e52325;
+	box-shadow: -5px -5px 0 #000, 0 -5px 0 #000, -5px 0 0 #000;
 }
 
 #iframe-popup.minimized:hover {

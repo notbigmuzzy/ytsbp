@@ -52,7 +52,12 @@ function getXMLFilesFromYT() {
 					fs.writeFileSync('./tmp/' + index + '.xml', data)
 
 					fs.readdir(tempDirectory, (err, files) => {
+						if (files.length % 20 == 0) {
+							console.log( 'Downloading files - ' + (files.length / (everyEntryInCSV.length-1)).toFixed(4)*100 + '%' )			
+						}
+
 						if(files.length == everyEntryInCSV.length -1) {
+							console.log('Downloading files done! Generating INDEX.html')
 							generateIndexHTMLFile();
 						}						
 					})
@@ -180,6 +185,7 @@ function generateChannelView() {
 
 			if (noOfFiles == files.length) {
 				write('</div>');
+				console.log('FINISHED!')
 			}
 			noOfFiles++;
 		});	
