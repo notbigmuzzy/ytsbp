@@ -73,11 +73,14 @@ function generateIndexHTMLFile() {
 //OG - CHANNEL VIEW
 function generateLatest() {
 	fs.readdir(tempDirectory, (err, filesLatest) => {
-		var noOfFilesLatest = 1;
+		var noOfFilesLatest = 1,
+			todayClass = 'first-today',
+			yesterdayClass = 'first-yesterday',
+			beforeClass = 'first-before';
+
 		filesLatest.forEach(function(file, index)  {
 			if (index == 0) {
-				write('<div class="category" id="latest"><p class="section-title"><span>Latest</span></p>')
-				write('<section class="whole-section" id="latestSection" data-section="latestSection"><div style="order:-999999999999" class="section-title" style="background-color:#666;"><a class="pin-section section-title-link" href="#pinned"><h3>Latest</br>Videos</h3></a></div>')
+				write('<div class="category" id="latest"><p class="section-title"><span></span></p><section class="whole-section" id="latestSection" data-section="latestSection">')
 			}
 
 			const 	thisFile = fs.readFileSync(tempDirectory + '/' + file,{encoding:'utf8', flag:'r'}),
@@ -89,7 +92,6 @@ function generateLatest() {
 				channelURL = objectified.feed.author.uri;
 				authorName = objectified.feed.author.name;
 
-				var noOfEntries = 1;
 				entries.forEach(function (value, index) {
 					if (index == 0) {
 						const 	entryInfo = value,
@@ -97,9 +99,36 @@ function generateLatest() {
 								videoTitle = entryInfo.title,
 								videoImg = entryInfo.group.thumbnail["@_url"],
 								videoDescription = entryInfo.group.description,
-								itemOrdering = entryInfo.updated.substring(0,10).replace(/\-/g, '');
+								itemOrdering = entryInfo.published.substring(0,10).replace(/\-/g, ''),
+								itemYear = itemOrdering.substring(0,4),
+								itemMonth = itemOrdering.substring(4,6),
+								itemDay = itemOrdering.substring(6,8),
+								today = new Date(),
+								todayYear = today.getFullYear(),
+								todayMonth = '0' + (today.getMonth()+1),
+								todayDay = '0' + today.getDate();
+								
+						var itemDateClass = '';
+						if (itemYear == todayYear) {
+							if (itemMonth == todayMonth) {
+								if (itemDay == todayDay) {
+									itemDateClass = 'today ' + todayClass;
+									todayClass = '';
+								} else if (itemDay == todayDay - 1) {
+									itemDateClass = 'yesterday ' + yesterdayClass;
+									yesterdayClass = '';
+								} else {
+									itemDateClass = 'before ' + beforeClass;
+									beforeClass = '';
+								}
+							} else {
+								itemDateClass = 'before prev-month';
+							}
+						} else {
+							itemDateClass = 'before prev-year';
+						}
 
-						write('<item style="order:-' + itemOrdering + '"><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p></item>');
+						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p></item>');
 					}
 				})
 

@@ -194,8 +194,7 @@ section item {
 	height: 196px;
 	color: rgba(255, 255, 255, 0.25);
 	border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0px 0px 8px -4px black;
+  box-shadow: 0px 0px 8px -4px black;
 }
 
 section .section-title {
@@ -264,6 +263,14 @@ section .section-title-link:hover:after {
 	content: 'UNPIN';
 }
 
+#latestSection {
+	overflow-y: hidden;
+}
+
+#latest .section-title {
+	padding: 13px;
+}
+
 #latest section .section-title-link:hover h3 {
 	display: flex;
 }
@@ -313,6 +320,7 @@ section .section-title-link:hover:after {
 	line-height: 1.25;
 	font-size: 20px;
 	font-family: sans-serif;
+	word-break: break-all;
 }
 
 #latest section item p {
@@ -323,6 +331,116 @@ section .section-title-link:hover:after {
 	opacity: 1;
 }
 
+#latest section .today {
+	margin-top: 50px;
+	position: relative;
+}
+
+#latest section .today:after {
+	content: '';
+	position: absolute;
+	top: -37px;
+	left: -16px;
+	right: 0;
+	height: 0;
+	border-top: 2px dashed #fff;
+}
+
+#latest section .today.first-today:after {
+	content: '';
+	position: absolute;
+	top: -37px;
+	left: 40%;
+	right: 0;
+	height: 0;
+	border-top: 2px dashed #fff;
+}
+
+#latest section .today.first-today:before {
+	content: 'TODAY';
+	position: absolute;
+	top: -55px;
+	left: 0;
+  text-transform: uppercase;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+#latest section .yesterday {
+	margin-top: 50px;
+	position: relative;
+}
+
+#latest section .yesterday:after {
+	content: '';
+	position: absolute;
+	top: -37px;
+	left: -18px;
+	right: 0;
+	height: 0;
+	border-top: 2px dotted #999;
+}
+
+#latest section .yesterday.first-yesterday:after {
+	content: '';
+	position: absolute;
+	top: -37px;
+	left: 70%;
+	right: 0;
+	height: 0;
+	border-top: 2px dotted #999;
+}
+
+#latest section .yesterday.first-yesterday:before {
+	content: 'YESTERDAY';
+	position: absolute;
+	top: -55px;
+	left: 0;
+  text-transform: uppercase;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+#latest section .before {
+	margin-top: 50px;
+	position: relative;
+}
+
+#latest section .before:after {
+	content: '';
+	position: absolute;
+	top: -37px;
+	left: -18px;
+	right: 0;
+	height: 0;
+	border-top: 2px solid #333;
+}
+
+#latest section .before.first-before:after {
+	content: '';
+	position: absolute;
+	top: -37px;
+	left: 50%;
+	right: 0;
+	height: 0;
+	border-top: 2px solid #333;
+}
+
+#latest section .before.first-before:before {
+	content: 'BEFORE';
+	position: absolute;
+	top: -55px;
+	left: 0;
+  text-transform: uppercase;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+}
 
 section item published {
 	position: absolute;
