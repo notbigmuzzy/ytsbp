@@ -299,7 +299,7 @@ section .section-title-link:hover:after {
   opacity: 0;
 }
 
-#latest section item:after {
+#latest section item i {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -440,6 +440,20 @@ section .section-title-link:hover:after {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 36px;
+}
+
+#history-sect item {
+	min-width: 196px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	font-family: sans-serif;
+	word-break: break-word;
+	padding: 0 10px;
+	background: #111;
+	text-align: center;
+	line-height: 1.5;
 }
 
 section item published {

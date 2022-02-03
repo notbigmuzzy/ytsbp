@@ -1,6 +1,7 @@
 //INIT LAZY LOAD
 document.addEventListener("DOMContentLoaded", function() {
     moveToPinnedOnLoad();
+    populateHistoryOnLoad();
     const observer = lozad();
     observer.observe();
 });
@@ -21,7 +22,26 @@ document.addEventListener('click', function (event) {
         .classList
         .add('show');
     iframePopup.src = iframeLink
+
+    var clickedTitle = event.target.dataset.title;
+    document.title = clickedTitle;
+
+    //INIT HISTORY LOCAL STORAGE AND ADD VALUE ON CLICK
+    if (localStorage.getItem("historyList")) {
+        var historyList = JSON.parse(localStorage.getItem("historyList"));
+    } else {
+        var historyList = [];
+    }
+
+    if (historyList.length > 30) {
+        historyList.shift();
+    }
+
+    historyList.push(clickedTitle)
+    localStorage.setItem("historyList", JSON.stringify(historyList));
+
 }, false);
+
 document.addEventListener('click', function (event) {
     if (!event.target.matches('#iframe-popup')) {
         return
@@ -32,6 +52,7 @@ document.addEventListener('click', function (event) {
         .classList  
         .remove('minimized');
 }, false);
+
 document.addEventListener('click', function (event) {
     if (!event.target.matches('#iframe-minimize')) {
         return
@@ -42,6 +63,7 @@ document.addEventListener('click', function (event) {
         .classList  
         .add('minimized');
 }, false);
+
 document.addEventListener('click', function (event) {
     if (!event.target.matches('#iframe-close')) {
         return
@@ -55,7 +77,9 @@ document.addEventListener('click', function (event) {
         .classList
         .remove('minimized');
     iframePopup.src = ''
+    document.title = "☛ ☈☉☊☌☡ ☚"
 }, false);
+
 document.addEventListener('keydown', event => {
     if (event.isComposing || event.keyCode === 27) {
         iframePopup
@@ -64,6 +88,7 @@ document.addEventListener('keydown', event => {
         iframePopup.src = ''
     }
 });
+
 document.addEventListener('click', function (event) {
     if (!event.target.matches('.pin-section')) {
         return
@@ -91,7 +116,6 @@ document.addEventListener('click', function (event) {
         pinnedSection.appendChild(fragmentPin);
         localStorage.setItem(clickedSectionData, 1);
     }
-
 }, false);
 
 //MOVE TO PINNED ON LOAD
@@ -110,10 +134,33 @@ function moveToPinnedOnLoad() {
             var thisSection = document.getElementById(value),
                 pinnedSection = document.getElementById('pinned');
 
-            fragmentAutoPin = document.createDocumentFragment();
-            fragmentAutoPin.appendChild(thisSection);
-            pinnedSection.appendChild(fragmentAutoPin);
-            localStorage.setItem(value, 1);
+            if (thisSection) {
+                fragmentAutoPin = document.createDocumentFragment();
+                fragmentAutoPin.appendChild(thisSection);
+                pinnedSection.appendChild(fragmentAutoPin);
+                localStorage.setItem(value, 1);
+            }
+        })
+    }
+}
+
+function populateHistoryOnLoad() {
+    if (localStorage.getItem("historyList")) {
+        var historyPopulate = JSON.parse(localStorage.getItem("historyList"));
+        historyPopulate.reverse();
+    }
+
+    if (historyPopulate) {
+        var historySection = document.getElementById('history-sect')
+
+        historyPopulate.forEach(function(value, index) {
+            var historyPin = document.createElement("item"),
+                  historyPinTitle = document.createTextNode(value);
+
+            historyPin.appendChild(historyPinTitle);
+            fragmentHistoryPin = document.createDocumentFragment();
+            fragmentHistoryPin.appendChild(historyPin);
+            historySection.appendChild(fragmentHistoryPin);
         })
     }
 }

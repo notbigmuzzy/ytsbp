@@ -75,7 +75,7 @@ function generateIndexHTMLFile() {
 	generateFooter();
 }
 
-//OG - CHANNEL VIEW
+//OG - LATES VIEW
 function generateLatest() {
 	fs.readdir(tempDirectory, (err, filesLatest) => {
 		var noOfFilesLatest = 1,
@@ -133,13 +133,13 @@ function generateLatest() {
 							itemDateClass = 'before prev-year';
 						}
 
-						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p></item>');
+						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p><i></i></item>');
 					}
 				})
 
 			if (noOfFilesLatest == filesLatest.length) {
 				write('</section></div>');
-				generatePinned();
+				generatePinnedAndHistory();
 			}
 			noOfFilesLatest++;
 		});	
@@ -175,7 +175,7 @@ function generateChannelView() {
 							videoTitle = entryInfo.title,
 							videoImg = entryInfo.group.thumbnail["@_url"];
 
-					write('<item><a class="iframe-source" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
+					write('<item><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
 
 					if (noOfEntries == entries.length) {
 						write('</section>')
@@ -199,12 +199,14 @@ function generateHeader() {
 
 //OG - SIDEBAR
 function generateSidebar() {
-	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a class="sidebar-pinned" href="#pinned"><span>Pinned</span></a> <a href="#subscriptions"><span>All</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
+	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a class="sidebar-pinned" href="#pinned"><span>Pinned</span></a> <a class="sidebar-pinned" href="#history"><span>History</span></a> <a href="#subscriptions"><span>All</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
 }
 
 //OG - PINNED
-function generatePinned() {
+function generatePinnedAndHistory() {
 	write('<div class="category" id="pinned"><p class="section-title"><span>Pinned</span></p></div>')
+	write('<div class="category" id="history"><p class="section-title"><span>History</span></p><section class="whole-section" id="history-sect" data-section="History"></section></div>')
+
 	generateChannelView();
 }
 
