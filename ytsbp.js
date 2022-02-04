@@ -199,14 +199,12 @@ function generateHeader() {
 
 //OG - SIDEBAR
 function generateSidebar() {
-	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a class="sidebar-pinned" href="#pinned"><span>Pinned</span></a> <a class="sidebar-pinned" href="#history"><span>History</span></a> <a href="#subscriptions"><span>All</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
+	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a class="sidebar-pinned" href="#history"><span>History</span></a> <a class="sidebar-pinned" href="#pinned"><span>Pinned</span></a> <a href="#subscriptions"><span>All</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
 }
 
 //OG - PINNED
 function generatePinnedAndHistory() {
-	write('<div class="category" id="pinned"><p class="section-title"><span>Pinned</span></p></div>')
-	write('<div class="category" id="history"><p class="section-title"><span>History</span></p><section class="whole-section" id="history-sect" data-section="History"></section></div>')
-
+	write('<div class="category" id="history"><p class="section-title"><span>History</span></p><section class="whole-section" id="history-sect" data-section="History"></section></div><div class="category" id="pinned"><p class="section-title"><span>Pinned</span></p></div>')
 	generateChannelView();
 }
 

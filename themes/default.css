@@ -165,10 +165,6 @@ nav #search-input:-ms-input-placeholder {
 	padding: 0;
 }
 
-.links .sidebar-pinned {
-	/*display: none;*/
-}
-
 section {
 	display: flex;
 	overflow-x: auto;
@@ -321,10 +317,7 @@ section .section-title-link:hover:after {
 	font-size: 20px;
 	font-family: sans-serif;
 	word-break: break-word;
-}
-
-#latest section item p {
-	opacity: 0.1;
+	opacity: 0.05;
 }
 
 #latest section item:hover p {
@@ -444,6 +437,7 @@ section .section-title-link:hover:after {
 
 #history-sect item {
 	min-width: 196px;
+	max-width: 196px;
 	display: flex;
 	justify-content: center;
 	align-items: center;

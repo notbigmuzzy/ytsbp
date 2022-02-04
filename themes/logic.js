@@ -23,22 +23,26 @@ document.addEventListener('click', function (event) {
         .add('show');
     iframePopup.src = iframeLink
 
-    var clickedTitle = event.target.dataset.title;
-    document.title = clickedTitle;
+    if(event.target.parentNode.parentNode.getAttribute('id') != 'history-sect') {
+        var clickedTitle = event.target.dataset.title,
+            clickedURL = event.target.href;
+        document.title = clickedTitle;
 
-    //INIT HISTORY LOCAL STORAGE AND ADD VALUE ON CLICK
-    if (localStorage.getItem("historyList")) {
-        var historyList = JSON.parse(localStorage.getItem("historyList"));
-    } else {
-        var historyList = [];
+        //INIT HISTORY LOCAL STORAGE AND ADD VALUE ON CLICK
+        if (localStorage.getItem("historyList")) {
+            var historyList = JSON.parse(localStorage.getItem("historyList"));
+        } else {
+            var historyList = [];
+        }
+
+        if (historyList.length > 30) {
+            historyList.shift();
+        }
+
+        historyList.push(clickedTitle + 'ᴥ' + clickedURL)
+        localStorage.setItem("historyList", JSON.stringify(historyList));
     }
 
-    if (historyList.length > 30) {
-        historyList.shift();
-    }
-
-    historyList.push(clickedTitle)
-    localStorage.setItem("historyList", JSON.stringify(historyList));
 
 }, false);
 
@@ -144,6 +148,7 @@ function moveToPinnedOnLoad() {
     }
 }
 
+//POPULATE HISTORY
 function populateHistoryOnLoad() {
     if (localStorage.getItem("historyList")) {
         var historyPopulate = JSON.parse(localStorage.getItem("historyList"));
@@ -155,10 +160,15 @@ function populateHistoryOnLoad() {
 
         historyPopulate.forEach(function(value, index) {
             var historyPin = document.createElement("item"),
-                  historyPinTitle = document.createTextNode(value);
+                historyPinLink = document.createElement("a"),
+                historyPinTitle = document.createTextNode(value.substring(0, value.indexOf('ᴥ')));
+
+            historyPinLink.href = value.substring(value.indexOf('ᴥ')+1, value.length);
+            historyPinLink.classList.add('iframe-source')
 
             historyPin.appendChild(historyPinTitle);
             fragmentHistoryPin = document.createDocumentFragment();
+            historyPin.appendChild(historyPinLink);
             fragmentHistoryPin.appendChild(historyPin);
             historySection.appendChild(fragmentHistoryPin);
         })
