@@ -75,7 +75,7 @@ function generateIndexHTMLFile() {
 	generateFooter();
 }
 
-//OG - LATES VIEW
+//OG - LATEST VIEW
 function generateLatest() {
 	fs.readdir(tempDirectory, (err, filesLatest) => {
 		var noOfFilesLatest = 1,
@@ -133,7 +133,7 @@ function generateLatest() {
 							itemDateClass = 'before prev-year';
 						}
 
-						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p><i></i></item>');
+						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><span> - ' + authorName +'</span><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p><i></i></item>');
 					}
 				})
 

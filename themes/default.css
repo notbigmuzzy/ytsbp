@@ -286,12 +286,23 @@ section .section-title-link:hover:after {
 }
 
 #latest section item title {
-	padding-bottom: 45px;
+	padding-bottom: 55px;
   font-size: 24px;
   opacity: 1;
 }
 
-#latest section item:hover title {
+#latest section item span {
+  position: absolute;
+  bottom: 35px;
+  left: 20px;
+  color: white;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #999;
+}
+
+#latest section item:hover title,
+#latest section item:hover span {
   opacity: 0;
 }
 

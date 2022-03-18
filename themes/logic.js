@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
 let iframePopup = document.getElementById('iframe-popup');
 let iframeClose = document.getElementById('iframe-close');
 
+//CLICK ITEM OPEN ITEM
 document.addEventListener('click', function (event) {
     if (!event.target.matches('.iframe-source')) {
         return
@@ -42,10 +43,9 @@ document.addEventListener('click', function (event) {
         historyList.push(clickedTitle + 'ᴥ' + clickedURL)
         localStorage.setItem("historyList", JSON.stringify(historyList));
     }
-
-
 }, false);
 
+//UNMINIZE
 document.addEventListener('click', function (event) {
     if (!event.target.matches('#iframe-popup')) {
         return
@@ -57,6 +57,7 @@ document.addEventListener('click', function (event) {
         .remove('minimized');
 }, false);
 
+//MINIMIZE
 document.addEventListener('click', function (event) {
     if (!event.target.matches('#iframe-minimize')) {
         return
@@ -68,6 +69,7 @@ document.addEventListener('click', function (event) {
         .add('minimized');
 }, false);
 
+//CLOSE POPUP
 document.addEventListener('click', function (event) {
     if (!event.target.matches('#iframe-close')) {
         return
@@ -84,15 +86,7 @@ document.addEventListener('click', function (event) {
     document.title = "☛ ☈☉☊☌☡ ☚"
 }, false);
 
-document.addEventListener('keydown', event => {
-    if (event.isComposing || event.keyCode === 27) {
-        iframePopup
-            .classList
-            .remove('show');
-        iframePopup.src = ''
-    }
-});
-
+//PIN SECTION
 document.addEventListener('click', function (event) {
     if (!event.target.matches('.pin-section')) {
         return
