@@ -510,7 +510,12 @@ section item .watch-later-button {
     text-align: center;
     height: 30px;
     border-radius: 50%;
-    opacity: 0.5;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+section item .lozad.loaded + .watch-later-button {
+	opacity: 0.5;
 }
 
 section item .watch-later-button:hover {

@@ -133,7 +133,7 @@ function generateLatest() {
 							itemDateClass = 'before prev-year';
 						}
 
-						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a href="#" class="watch-later-button">♥</a><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><span> - ' + authorName +'</span><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p><i></i></item>');
+						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><span> - ' + authorName +'</span><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><a href="#" class="watch-later-button">♥</a><p>"' + videoDescription + '"</p><i></i></item>');
 					}
 				})
 
@@ -175,7 +175,7 @@ function generateChannelView() {
 							videoTitle = entryInfo.title,
 							videoImg = entryInfo.group.thumbnail["@_url"];
 
-					write('<item><a href="#" class="watch-later-button">♥</a><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
+					write('<item><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><a href="#" class="watch-later-button">♥</a></item>');
 
 					if (noOfEntries == entries.length) {
 						write('</section>')
@@ -199,7 +199,7 @@ function generateHeader() {
 
 //OG - SIDEBAR
 function generateSidebar() {
-	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a class="sidebar-pinned" href="#history"><span>History</span></a> <a class="sidebar-pinned" href="#pinned"><span>Pinned</span></a> <a href="#subscriptions"><span>All</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
+	write('<nav> <div class="back"></div> <a href="index.html" class="icon logo"> <span>⍾</span> </a> <div class="links"> <a href="#latest"><span>Latest</span></a> <a href="#watch-later"><span>Watch</span></a> <a class="sidebar-pinned" href="#history"><span>History</span></a> <a class="sidebar-pinned" href="#pinned"><span>Pinned</span></a> <a href="#subscriptions"><span>All</span></a> </div> <div class="links"> <p class="icon" id="input-toggle"> <span> <i class="search">☌</i> <input id="search-input" type="text" placeholder="Filter.." /> </span> </p> </div> </nav>')
 }
 
 //OG - PINNED
