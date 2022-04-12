@@ -133,7 +133,7 @@ function generateLatest() {
 							itemDateClass = 'before prev-year';
 						}
 
-						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><span> - ' + authorName +'</span><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p><i></i></item>');
+						write('<item class="' + itemDateClass + '" style="order:-' + itemOrdering + '"><a href="#" class="watch-later-button">♥</a><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><span> - ' + authorName +'</span><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /><p>"' + videoDescription + '"</p><i></i></item>');
 					}
 				})
 
@@ -175,7 +175,7 @@ function generateChannelView() {
 							videoTitle = entryInfo.title,
 							videoImg = entryInfo.group.thumbnail["@_url"];
 
-					write('<item><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
+					write('<item><a href="#" class="watch-later-button">♥</a><a class="iframe-source" data-title="' + videoTitle + '" href="https://www.youtube.com/embed/' + videoID + '?rel=0"></a><title>' + videoTitle + '</title><img class="lozad" data-toggle-class="loaded" data-src="' + videoImg + '" width="480" height="360" /></item>');
 
 					if (noOfEntries == entries.length) {
 						write('</section>')
@@ -204,6 +204,7 @@ function generateSidebar() {
 
 //OG - PINNED
 function generatePinnedAndHistory() {
+	write('<div class="category" id="watch-later"><p class="section-title"><span>Watch Later</span></p><section class="whole-section" id="watch-later-sect" data-section="WatchLater"></section></div>')
 	write('<div class="category" id="history"><p class="section-title"><span>History</span></p><section class="whole-section" id="history-sect" data-section="History"></section></div><div class="category" id="pinned"><p class="section-title"><span>Pinned</span></p></div>')
 	generateChannelView();
 }

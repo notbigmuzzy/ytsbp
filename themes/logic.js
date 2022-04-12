@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     moveToPinnedOnLoad();
     populateHistoryOnLoad();
+    populateWatchLaterListOnLoad();
     const observer = lozad();
     observer.observe();
 });
@@ -9,6 +10,41 @@ document.addEventListener("DOMContentLoaded", function() {
 //IFRAME POPUP
 let iframePopup = document.getElementById('iframe-popup');
 let iframeClose = document.getElementById('iframe-close');
+
+//ADD ITEM TO WATCH LATER LIST
+document.addEventListener('click', function (event) {
+    if (!event.target.matches('.watch-later-button')) {
+        return
+    }
+    event.preventDefault();
+    event.stopPropagation();
+
+    var clickedTitle = event.target.parentNode.querySelector('.iframe-source').dataset.title,
+        clickedURL = event.target.parentNode.querySelector('.iframe-source').href;
+    document.title = clickedTitle;
+
+    if (localStorage.getItem("watchLaterList")) {
+        var watchLaterList = JSON.parse(localStorage.getItem("watchLaterList"));
+    } else {
+        var watchLaterList = [];
+    }
+
+    if (watchLaterList.length > 30) {
+        watchLaterList.shift();
+    }
+
+    watchLaterList.push(clickedTitle + 'ᴥ' + clickedURL)
+    localStorage.setItem("watchLaterList", JSON.stringify(watchLaterList));
+
+    var elem = document.getElementById('watch-later-sect').querySelectorAll('item');
+    elem.forEach(function(e) {
+        e.parentNode.removeChild(e);
+    })
+
+    
+
+    populateWatchLaterListOnLoad();
+}, false);
 
 //CLICK ITEM OPEN ITEM
 document.addEventListener('click', function (event) {
@@ -24,7 +60,8 @@ document.addEventListener('click', function (event) {
         .add('show');
     iframePopup.src = iframeLink
 
-    if(event.target.parentNode.parentNode.getAttribute('id') != 'history-sect') {
+    if(event.target.parentNode.parentNode.getAttribute('id') != 'history-sect' && event.target.parentNode.parentNode.getAttribute('id') != 'watch-later-sect') {
+        console.log('add to history')
         var clickedTitle = event.target.dataset.title,
             clickedURL = event.target.href;
         document.title = clickedTitle;
@@ -165,6 +202,33 @@ function populateHistoryOnLoad() {
             historyPin.appendChild(historyPinLink);
             fragmentHistoryPin.appendChild(historyPin);
             historySection.appendChild(fragmentHistoryPin);
+        })
+    }
+}
+
+//POPULATE WATCH LATER LIST
+function populateWatchLaterListOnLoad() {
+    if (localStorage.getItem("watchLaterList")) {
+        var watchLaterPopulate = JSON.parse(localStorage.getItem("watchLaterList"));
+        watchLaterPopulate.reverse();
+    }
+
+    if (watchLaterPopulate) {
+        var watchLaterSection = document.getElementById('watch-later-sect');
+
+        watchLaterPopulate.forEach(function(value, index) {
+            var watchLaterPin = document.createElement("item"),
+                watchLaterPinLink = document.createElement("a"),
+                watchLaterPinTitle = document.createTextNode(value.substring(0, value.indexOf('ᴥ')));
+
+            watchLaterPinLink.href = value.substring(value.indexOf('ᴥ')+1, value.length);
+            watchLaterPinLink.classList.add('iframe-source')
+
+            watchLaterPin.appendChild(watchLaterPinTitle);
+            fragmentwatchLaterPin = document.createDocumentFragment();
+            watchLaterPin.appendChild(watchLaterPinLink);
+            fragmentwatchLaterPin.appendChild(watchLaterPin);
+            watchLaterSection.appendChild(fragmentwatchLaterPin);
         })
     }
 }

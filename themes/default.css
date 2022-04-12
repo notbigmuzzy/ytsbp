@@ -461,6 +461,21 @@ section .section-title-link:hover:after {
 	line-height: 1.5;
 }
 
+#watch-later-sect item {
+	min-width: 196px;
+	max-width: 196px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	font-family: sans-serif;
+	word-break: break-word;
+	padding: 0 10px;
+	background: #111;
+	text-align: center;
+	line-height: 1.5;
+}
+
 section item published {
 	position: absolute;
 	bottom: 0;
@@ -480,6 +495,28 @@ section item .iframe-source {
 	right: 0;
 	height: 100%;
 	z-index: 1;
+}
+
+section item .watch-later-button {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 2;
+    background-color: red;
+    color: white;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    height: 30px;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+section item .watch-later-button:hover {
+		opacity: 1;
+    background-color: white;
+    color: red;
 }
 
 section item title {
